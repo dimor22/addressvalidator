@@ -7,7 +7,7 @@
         }
     ],
 	"license": "MIT",
-    "autoloa":
+    "autoload":
         {
             "psr-4":
                 {
