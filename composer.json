@@ -1,0 +1,17 @@
+{
+    "name": "root/addressvalidator",
+    "authors": [
+        {
+            "name": "David Lopez",
+            "email": "dimor22@gmail.com"
+        }
+    ],
+	"license": "MIT",
+    "autoloa":
+        {
+            "psr-4":
+                {
+                    "App\\": "src"
+                }
+        }
+}
