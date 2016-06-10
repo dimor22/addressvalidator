@@ -34,6 +34,9 @@ class Address {
 
 
     /**
+     * Encodes the variables to send them to the SMARTYSTREETS API.
+     * Checks that a valid response is received and then saves the whole address
+     * in the database.
      * @return bool
      */
     function validate()
@@ -69,6 +72,7 @@ class Address {
     }
 
     /**
+     * Saves new Addresses to the db
      * @return bool
      */
     function save()
@@ -91,6 +95,7 @@ class Address {
     }
 
     /**
+     * Displays all the records on the table
      * @return array
      */
     function getAll()
@@ -102,6 +107,7 @@ class Address {
 
 
     /**
+     * Validates the input and saves them
      * @param $street
      * @param $city
      * @param $state
@@ -121,6 +127,7 @@ class Address {
     }
 
     /**
+     * Sends a formatted response
      * @return array
      */
     function getAjaxResponse(){
