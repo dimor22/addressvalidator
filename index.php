@@ -172,6 +172,10 @@ $addressvalidator = new Address();
             setTimeout(function(){
                 $('#last').removeClass('flash');
             },3000);
+
+            $("#address").val("");
+            var city = $("#city").val("");
+            var state = $("#state").val("");
         }
 
         // Displays error message when results come back
