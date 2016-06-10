@@ -73,7 +73,7 @@ class address {
     function getInput()
     {
         if(empty($_REQUEST['address']) || empty($_REQUEST['city']) || empty($_REQUEST['state'])){
-            return ['error' => 'Empty input'];
+            return false;
         }
 
         // Address input
