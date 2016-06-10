@@ -8,7 +8,9 @@
 
 namespace App;
 
-class address {
+use ORM;
+
+class Address {
 
     private $authId = "65605c23-5015-5dd7-c238-050594d541c7";
     private $authToken = "VeT7OjTAAtb9vMEk58gE";
@@ -23,7 +25,9 @@ class address {
     public $validated_zip     = '';
 
 
-
+    /**
+     * @return bool
+     */
     function validate()
     {
 
@@ -39,48 +43,86 @@ class address {
         // GET request and turn into associative array
         $result = json_decode(file_get_contents($req),true);
 
-        $this->validated_street = $result[0]['delivery_line_1'];
-        $this->validated_city = $result[0][components]['city_name'];
-        $this->validated_state = $result[0][components]['state_abbreviation'];
-        $this->validated_zip = $result[0][components]['zipcode'];
+        // Persist to database if API response returns valid data
+        if( !empty($result) ){
+            $this->validated_street = $result[0]['delivery_line_1'];
+            $this->validated_city = $result[0]['components']['city_name'];
+            $this->validated_state = $result[0]['components']['state_abbreviation'];
+            $this->validated_zip = $result[0]['components']['zipcode'];
 
-        return $result;
+            $this->save();
+
+            return true;
+        }
+
+
+        return false;
 
     }
 
-    function save($searched, $validated)
+    /**
+     * @return bool
+     */
+    function save()
     {
+        $address = ORM::for_table('addresses')->create();
+
+        $address->searched_address1     = $this->street;
+        $address->searched_city         = $this->city;
+        $address->searched_state        = $this->state;
+        $address->validated_address1    = $this->validated_street;
+        $address->validated_city        = $this->validated_city;
+        $address->validated_state       = $this->validated_state;
+        $address->validated_zip         = $this->validated_zip;
+
+        $address->save();
+
+        //return $address->save() ? true : false;
+        return true;
 
     }
 
+    /**
+     * @return array
+     */
     function getAll()
     {
+        $addresses = ORM::for_table('addresses')->order_by_desc('created_at')->find_many()->as_array();
 
+        return $addresses;
     }
 
-    function show(){
-        return [
-            'searched_address'      =>  $this->street,
-            'searched_city'         =>  $this->city,
-            'searched_state'        =>  $this->state,
-            'validated_address'     =>  $this->validated_street,
-            'validated_city'        =>  $this->validated_city,
-            'validated_state'       =>  $this->validated_state,
-            'validated_zip'         =>  $this->validated_zip
-        ];
-    }
 
-    function getInput()
+    /**
+     * @param $street
+     * @param $city
+     * @param $state
+     * @return bool
+     */
+    function getInput($street, $city, $state)
     {
-        if(empty($_REQUEST['address']) || empty($_REQUEST['city']) || empty($_REQUEST['state'])){
+        if(empty($street) || empty($city) || empty($state)){
             return false;
         }
 
         // Address input
-        $this->street = $_REQUEST['address'];
-        $this->city = $_REQUEST['city'];
-        $this->state = $_REQUEST['state'];
+        $this->street = $street;
+        $this->city = $city;
+        $this->state = $state;
         return true;
+    }
+
+    /**
+     * @return array
+     */
+    function getAjaxResponse(){
+        $address = [
+            'street'    =>  $this->validated_street,
+            'city'      =>  $this->validated_city,
+            'state'     =>  $this->validated_state,
+            'zip'       =>  $this->validated_zip
+        ];
+        return $address;
     }
 
 }

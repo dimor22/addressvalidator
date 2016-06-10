@@ -8,14 +8,11 @@
 
 require_once 'bootstrap.php';
 
-use App\address;
+use App\Address;
 
-$addressvalidator = new address();
+$addressvalidator = new Address();
 
-
-//if ( $addressvalidator->getInput($_GET['address'], $_GET['city'], $_GET['state']) ){
-//    $result = $addressvalidator->validate();
-//} ?>
+?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -39,6 +36,8 @@ $addressvalidator = new address();
         <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 
         <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+
+        <!-- Datatables plugin scripts -->
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
 
@@ -122,8 +121,7 @@ $addressvalidator = new address();
 
     <script>
 
-        // validation
-
+        // Validation
         $("button").click( function(e){
 
             e.preventDefault();
@@ -162,6 +160,7 @@ $addressvalidator = new address();
 
         }
 
+        // Appends new item to the top of the table
         function appendNewAddress(newAddress){
             $('tbody').prepend('<tr id="last" class="flash"><td>'+ newAddress.street +'</td><td>' + newAddress.city + '</td><td>' + newAddress.state + '</td><td>' + newAddress.zip + '</td></tr>');
             setTimeout(function(){
@@ -169,6 +168,7 @@ $addressvalidator = new address();
             },3000);
         }
 
+        // Displays error message when results come back
         function badAddress(){
             $('#errormsg').text("No results came back, please try again.");
         }

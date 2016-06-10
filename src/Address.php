@@ -25,8 +25,9 @@ class Address {
     public $validated_zip     = '';
 
 
-
-
+    /**
+     * @return bool
+     */
     function validate()
     {
 
@@ -59,6 +60,9 @@ class Address {
 
     }
 
+    /**
+     * @return bool
+     */
     function save()
     {
         $address = ORM::for_table('addresses')->create();
@@ -78,6 +82,9 @@ class Address {
 
     }
 
+    /**
+     * @return array
+     */
     function getAll()
     {
         $addresses = ORM::for_table('addresses')->order_by_desc('created_at')->find_many()->as_array();
@@ -85,18 +92,13 @@ class Address {
         return $addresses;
     }
 
-    function show(){
-        return [
-            'searched_address'      =>  $this->street,
-            'searched_city'         =>  $this->city,
-            'searched_state'        =>  $this->state,
-            'validated_address'     =>  $this->validated_street,
-            'validated_city'        =>  $this->validated_city,
-            'validated_state'       =>  $this->validated_state,
-            'validated_zip'         =>  $this->validated_zip
-        ];
-    }
 
+    /**
+     * @param $street
+     * @param $city
+     * @param $state
+     * @return bool
+     */
     function getInput($street, $city, $state)
     {
         if(empty($street) || empty($city) || empty($state)){
@@ -110,6 +112,9 @@ class Address {
         return true;
     }
 
+    /**
+     * @return array
+     */
     function getAjaxResponse(){
         $address = [
             'street'    =>  $this->validated_street,
