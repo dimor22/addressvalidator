@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="godaddy" uploadOnCheckin="f3be1306-4c79-4898-a4ab-078e37c28d20">
+    <serverData>
+      <paths name="godaddy">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myUploadOnCheckinName" value="godaddy" />
+  </component>
+</project>

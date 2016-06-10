@@ -71,7 +71,9 @@ $addressvalidator = new address();
                     <div class="form-group">
                         <button type="submit" class="btn btn-default" id="submit">Submit</button>
                         <span id="errormsg"></span>
+
                     </div>
+
                 </form>
             </div>
         </div>
@@ -132,7 +134,7 @@ $addressvalidator = new address();
 
             if( address == "" ||  city == "" || state == ""){
                 console.log("empty fields");
-                $('#errormsg').html = "All three fields are necessary, please try again.";
+                $('#errormsg').text("All three fields are necessary, please try again.");
             } else {
                 sendRequestAjax(address, city, state);
             }
@@ -161,11 +163,14 @@ $addressvalidator = new address();
         }
 
         function appendNewAddress(newAddress){
-            $('tbody').prepend('<tr><td>'+ newAddress.street +'</td><td>' + newAddress.city + '</td><td>' + newAddress.state + '</td><td>' + newAddress.zip + '</td></tr>');
+            $('tbody').prepend('<tr id="last" class="flash"><td>'+ newAddress.street +'</td><td>' + newAddress.city + '</td><td>' + newAddress.state + '</td><td>' + newAddress.zip + '</td></tr>');
+            setTimeout(function(){
+                $('#last').removeClass('flash');
+            },3000);
         }
 
         function badAddress(){
-            $('#errormsg').html = "No results came back, please try again.";
+            $('#errormsg').text("No results came back, please try again.");
         }
 
 
