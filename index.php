@@ -4,6 +4,12 @@
  * User: David Lopez
  * Date: 6/9/16
  * Time: 4:38 PM
+ *
+ *
+ * This application uses Bootstrap 3 and Datatable plugin on the front-end.
+ * I've used Idiorm as a ORM that works on top of PDO for compatibility.
+ * And the rest of the php code is just from scratch.
+ * Composer and namespaces are also used.
  */
 
 require_once 'bootstrap.php';
