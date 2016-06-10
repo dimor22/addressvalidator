@@ -9,6 +9,11 @@
 
 require '../bootstrap.php';
 
+/*
+ * Sends the user input over to the Address class to validate and save.
+ * It returns the new complete validated address ready to be
+ * appended at the top of the table.
+ */
 
 $address = new \App\Address();
 

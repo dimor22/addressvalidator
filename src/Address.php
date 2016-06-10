@@ -12,6 +12,14 @@ use ORM;
 
 class Address {
 
+    /*
+     * This class handles all the behaviour related to the address object.
+     *
+     * # Validates
+     * # Saves
+     * # Displays
+     * # Returns ajax response
+     */
     private $authId = "65605c23-5015-5dd7-c238-050594d541c7";
     private $authToken = "VeT7OjTAAtb9vMEk58gE";
 
