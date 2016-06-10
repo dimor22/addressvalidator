@@ -24,20 +24,13 @@ class address {
 
 
 
-    function validate($input_street, $input_city, $input_state)
+    function validate()
     {
-        if(empty($input_street) || empty($input_city) || empty($input_state)){
-            return ['error' => 'Empty input'];
-        }
 
-        // Address input
-        $this->street = $input_street;
-        $this->city = $input_city;
-        $this->state = $input_state;
 
-        $input1 = urlencode($input_street);
-        $input2 = urlencode($input_city);
-        $input3 = urlencode($input_state);
+        $input1 = urlencode($this->street);
+        $input2 = urlencode($this->city);
+        $input3 = urlencode($this->state);
 
         // Build the URL
         $req = "https://api.smartystreets.com/street-address/?street={$input1}&city={$input2}&state={$input3}&auth-id={$this->authId}&auth-token={$this->authToken}";
@@ -72,9 +65,22 @@ class address {
             'searched_state'        =>  $this->state,
             'validated_address'     =>  $this->validated_street,
             'validated_city'        =>  $this->validated_city,
-            'validated_state'       => $this->validated_state,
-            'validated_zip'         => $this->validated_zip
+            'validated_state'       =>  $this->validated_state,
+            'validated_zip'         =>  $this->validated_zip
         ];
+    }
+
+    function getInput()
+    {
+        if(empty($_REQUEST['address']) || empty($_REQUEST['city']) || empty($_REQUEST['state'])){
+            return ['error' => 'Empty input'];
+        }
+
+        // Address input
+        $this->street = $_REQUEST['address'];
+        $this->city = $_REQUEST['city'];
+        $this->state = $_REQUEST['state'];
+        return true;
     }
 
 }
