@@ -12,13 +12,10 @@ use App\address;
 
 $addressvalidator = new address();
 
-//$_REQUEST['address'] = "5870 harmon";
-//$_REQUEST['city'] = "las vegas";
-//$_REQUEST['state'] = "nevada";
 
-if ( $addressvalidator->getInput() ){
-    $result = $addressvalidator->validate();
-} ?>
+//if ( $addressvalidator->getInput($_GET['address'], $_GET['city'], $_GET['state']) ){
+//    $result = $addressvalidator->validate();
+//} ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -60,7 +57,7 @@ if ( $addressvalidator->getInput() ){
         <!-- FORM -->
         <div class="row">
             <div class="col-lg-12">
-                <h2>Validate new Address</h2>
+                <h2>Validate new Address - <small>All fields are required</small></h2>
                 <form>
                     <div class="form-group">
                         <input type="text" class="form-control" id="address" name="address" placeholder="Address">
@@ -72,7 +69,8 @@ if ( $addressvalidator->getInput() ){
                         <input type="text" class="form-control" id="state" name="state" placeholder="State">
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="submit" class="btn btn-default" id="submit">Submit</button>
+                        <span id="errormsg"></span>
                     </div>
                 </form>
             </div>
@@ -101,120 +99,77 @@ if ( $addressvalidator->getInput() ){
                 </tr>
                 </tfoot>
                 <tbody>
-                <tr>
-                    <td>234 Pepe Dr.</td>
-                    <td>Las Vegas</td>
-                    <td>NV</td>
-                    <td>56474</td>
-                </tr>
-                <tr>
-                    <td>234 Pepe Dr.</td>
-                    <td>Las Vegas</td>
-                    <td>NV</td>
-                    <td>56474</td>
-                </tr>
-                <tr>
-                    <td>234 Pepe Dr.</td>
-                    <td>Las Vegas</td>
-                    <td>NV</td>
-                    <td>56474</td>
-                </tr>
-                <tr>
-                    <td>234 Pepe Dr.</td>
-                    <td>Las Vegas</td>
-                    <td>NV</td>
-                    <td>56474</td>
-                </tr>
-                <tr>
-                    <td>234 Pepe Dr.</td>
-                    <td>Las Vegas</td>
-                    <td>NV</td>
-                    <td>56474</td>
-                </tr>
-                <tr>
-                    <td>234 Pepe Dr.</td>
-                    <td>Las Vegas</td>
-                    <td>NV</td>
-                    <td>56474</td>
-                </tr>
-                <tr>
-                    <td>234 Pepe Dr.</td>
-                    <td>Las Vegas</td>
-                    <td>NV</td>
-                    <td>56474</td>
-                </tr>
-                <tr>
-                    <td>234 Pepe Dr.</td>
-                    <td>Las Vegas</td>
-                    <td>NV</td>
-                    <td>56474</td>
-                </tr>
-                <tr>
-                    <td>234 Pepe Dr.</td>
-                    <td>Las Vegas</td>
-                    <td>NV</td>
-                    <td>56474</td>
-                </tr>
-                <tr>
-                    <td>234 Pepe Dr.</td>
-                    <td>Las Vegas</td>
-                    <td>NV</td>
-                    <td>56474</td>
-                </tr>
-                <tr>
-                    <td>234 Pepe Dr.</td>
-                    <td>Las Vegas</td>
-                    <td>NV</td>
-                    <td>56474</td>
-                </tr>
-                <tr>
-                    <td>234 Pepe Dr.</td>
-                    <td>Las Vegas</td>
-                    <td>NV</td>
-                    <td>56474</td>
-                </tr>
-                <tr>
-                    <td>777 Pepe Dr.</td>
-                    <td>Las Vegas</td>
-                    <td>NV</td>
-                    <td>56474</td>
-                </tr>
-                <tr>
-                    <td>234 Pepe Dr.</td>
-                    <td>Las Vegas</td>
-                    <td>NV</td>
-                    <td>56474</td>
-                </tr>
-                <tr>
-                    <td>234 Pepe Dr.</td>
-                    <td>Las Vegas</td>
-                    <td>NV</td>
-                    <td>56474</td>
-                </tr>
+                <?php
+
+                    foreach($addressvalidator->getAll() as $address){
+                        echo '<tr>';
+                        echo '<td>' . $address['validated_address1'] . '</td>';
+                        echo '<td>' . $address['validated_city'] . '</td>';
+                        echo '<td>' . $address['validated_state'] . '</td>';
+                        echo '<td>' . $address['validated_zip'] . '</td>';
+                        echo '</tr>';
+                    }
+
+                ?>
                 </tbody>
             </table>
             </div>
         </div>
 
-
-
-
-
-        <div class="row">
-            <div class="col-lg-12">
-
-            <?php
-            if( !empty($result) ){
-
-                echo "<pre>";
-                print_r($addressvalidator->show());
-                echo "</pre>";
-            }
-            ?>
-            </div>
-        </div>
-
     </div>
+
+    <script>
+
+        // validation
+
+        $("button").click( function(e){
+
+            e.preventDefault();
+
+            var address = $("#address").val();
+            var city = $("#city").val();
+            var state = $("#state").val();
+
+            if( address == "" ||  city == "" || state == ""){
+                console.log("empty fields");
+                $('#errormsg').html = "All three fields are necessary, please try again.";
+            } else {
+                sendRequestAjax(address, city, state);
+            }
+        });
+
+        function sendRequestAjax(address, city, state){
+
+            $.ajax({
+                url: "src/Ajax.php",
+                data: {input1: address, input2: city, input3: state},
+                dataType: "json",
+                success: function(result){
+                    console.log(result);
+                    if (result.street.length > 0){
+                        appendNewAddress(result);
+                    } else {
+                        badAddress();
+                    }
+                },
+                error: function(){
+                    console.log('something went wrong');
+                }
+
+            });
+
+        }
+
+        function appendNewAddress(newAddress){
+            $('tbody').prepend('<tr><td>'+ newAddress.street +'</td><td>' + newAddress.city + '</td><td>' + newAddress.state + '</td><td>' + newAddress.zip + '</td></tr>');
+        }
+
+        function badAddress(){
+            $('#errormsg').html = "No results came back, please try again.";
+        }
+
+
+    </script>
 </body>
 </html>
 

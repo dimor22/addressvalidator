@@ -20,11 +20,20 @@ class ComposerStaticInit8f610e272fd77c876da5b038c7e69ce3
         ),
     );
 
+    public static $classMap = array (
+        'IdiormMethodMissingException' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
+        'IdiormResultSet' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
+        'IdiormString' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
+        'IdiormStringException' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
+        'ORM' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit8f610e272fd77c876da5b038c7e69ce3::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit8f610e272fd77c876da5b038c7e69ce3::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit8f610e272fd77c876da5b038c7e69ce3::$classMap;
 
         }, null, ClassLoader::class);
     }

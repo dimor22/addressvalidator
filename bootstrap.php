@@ -10,4 +10,5 @@ require_once 'vendor/autoload.php';
 
 date_default_timezone_set('America/Los_Angeles');
 
+require_once 'config/db.php';
 
