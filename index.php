@@ -75,6 +75,7 @@ $addressvalidator = new Address();
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-default" id="submit">Submit</button>
+                        <img src="public/ActivityIndicator.gif" id="indicator" width="30" />
                         <span id="errormsg"></span>
 
                     </div>
@@ -139,7 +140,9 @@ $addressvalidator = new Address();
             if( address == "" ||  city == "" || state == ""){
                 console.log("empty fields");
                 $('#errormsg').text("All three fields are necessary, please try again.");
+                hideErrorMsg();
             } else {
+                $('#indicator').show();
                 sendRequestAjax(address, city, state);
             }
         });
@@ -151,6 +154,7 @@ $addressvalidator = new Address();
                 data: {input1: address, input2: city, input3: state},
                 dataType: "json",
                 success: function(result){
+                    $('#indicator').hide();
                     console.log(result);
                     if (result.street.length > 0){
                         appendNewAddress(result);
@@ -173,14 +177,26 @@ $addressvalidator = new Address();
                 $('#last').removeClass('flash');
             },3000);
 
-            $("#address").val("");
-            var city = $("#city").val("");
-            var state = $("#state").val("");
+            resetFields();
         }
 
         // Displays error message when results come back
         function badAddress(){
             $('#errormsg').text("No results came back, please try again.");
+            hideErrorMsg();
+            resetFields();
+        }
+
+        function hideErrorMsg(){
+            setTimeout(function(){
+                $('#errormsg').text("");
+            },3000);
+        }
+
+        function resetFields(){
+            $("#address").val("");
+            $("#city").val("");
+            $("#state").val("");
         }
 
 

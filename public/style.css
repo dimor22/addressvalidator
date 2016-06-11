@@ -3,7 +3,7 @@
 }
 #errormsg{
     color: indianred;
-    margin-left: 50px;
+    margin-left: 30px;
     font-size: larger;
 }
 * {
@@ -13,4 +13,8 @@
 }
 .flash {
     background: rgba(0, 128, 0, 0.3) !important;
+}
+#indicator{
+    margin: 10px;
+    display: none;
 }
