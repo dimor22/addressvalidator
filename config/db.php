@@ -16,7 +16,7 @@
 
 // prod
 ORM::configure([
-    'connection_string' => 'mysql:host=avalidator.db.10902881.hostedresource.com;dbname=avalidator',
+    'connection_string' => 'yourown',
     'username' => 'yourown',
     'password' => 'yourown',
 ]);
