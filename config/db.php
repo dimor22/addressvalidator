@@ -17,8 +17,8 @@
 // prod
 ORM::configure([
     'connection_string' => 'mysql:host=avalidator.db.10902881.hostedresource.com;dbname=avalidator',
-    'username' => 'avalidator',
-    'password' => 'Davidhilda521!',
+    'username' => 'yourown',
+    'password' => 'yourown',
 ]);
 
 ORM::configure('return_result_sets', true); // returns result sets
