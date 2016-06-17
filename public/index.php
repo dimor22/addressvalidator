@@ -20,7 +20,6 @@ require_once '../config/db.php';
 
 use App\Address;
 
-echo class_exists('App\Address') ? 'yes' : 'no';
 
 $addressvalidator = new Address();
 
