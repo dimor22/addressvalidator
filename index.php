@@ -12,11 +12,11 @@
  * Composer and namespaces are also used.
  */
 
-require_once '../vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
 date_default_timezone_set('America/Los_Angeles');
 
-require_once '../config/db.php';
+require_once 'config/db.php';
 
 use App\Address;
 
@@ -30,8 +30,8 @@ $addressvalidator = new Address();
     <head>
         <meta charset="utf-8">
 
-        <link rel="stylesheet" href="css/style.css"/>
-        <link rel="stylesheet" href="css/table.css"/>
+        <link rel="stylesheet" href="inc/css/style.css"/>
+        <link rel="stylesheet" href="inc/css/table.css"/>
 
         <title>Address Validator</title>
         <!--[if IE]>
@@ -80,7 +80,7 @@ $addressvalidator = new Address();
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-default" id="submit">Submit</button>
-                        <img src="img/ActivityIndicator.gif" id="indicator" width="30" />
+                        <img src="inc/img/ActivityIndicator.gif" id="indicator" width="30" />
                         <span id="errormsg"></span>
 
                     </div>
@@ -130,7 +130,7 @@ $addressvalidator = new Address();
         </div>
 
     </div>
-    <script src="js/avalidator.js"></script>
+    <script src="inc/js/avalidator.js"></script>
 </body>
 </html>
 

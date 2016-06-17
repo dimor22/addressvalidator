@@ -20,7 +20,7 @@ $("button").click( function(e){
 function sendRequestAjax(address, city, state){
 
     $.ajax({
-        url: "../ajax/validate_address.php",
+        url: "ajax/validate_address.php",
         data: {input1: address, input2: city, input3: state},
         dataType: "json",
         success: function(result){
