@@ -6,16 +6,21 @@
  * Time: 3:02 AM
  */
 
-
-require '../bootstrap.php';
-
 /*
  * Sends the user input over to the Address class to validate and save.
  * It returns the new complete validated address ready to be
  * appended at the top of the table.
  */
 
-$address = new \App\Address();
+require_once '../vendor/autoload.php';
+
+date_default_timezone_set('America/Los_Angeles');
+
+require_once '../config/db.php';
+
+use App\Address;
+
+$address = new Address();
 
 $address->getInput($_GET['input1'],$_GET['input2'],$_GET['input3']);
 
