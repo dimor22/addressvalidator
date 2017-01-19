@@ -7,10 +7,11 @@ And the rest of the php code is just from scratch.
 Composer and namespaces are also used.
 
 Bootstrap 3: http://getbootstrap.com/
+
 SmartyStreets: https://smartystreets.com/
  
 
-Live Demo: http://webbuilder.solutions/apps/addressvalidator/
+Live Demo: http://dlopez.xyz/apps/addressvalidator/
 
 
 
