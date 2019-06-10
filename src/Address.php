@@ -24,6 +24,7 @@ class Address {
     private $authToken = AUTH_TOKEN;
 
 
+
     public $street  = '';
     public $city    = '';
     public $state   = '';
