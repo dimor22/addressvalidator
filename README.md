@@ -8,7 +8,7 @@ Composer and namespaces are also used.
 
 Bootstrap 3: http://getbootstrap.com/
 
-SmartyStreets: https://smartystreets.com/
+SmartyStreets: https://smartystreets.com/ ( API free version expired )
  
 
 Live Demo: http://dlopez.xyz/apps/addressvalidator/
