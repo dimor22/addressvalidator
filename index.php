@@ -18,7 +18,7 @@ date_default_timezone_set('America/Los_Angeles');
 
 require_once 'config/db.php';
 
-use App\Address;
+use App\Address2;
 
 
 $addressvalidator = new Address();
