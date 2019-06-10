@@ -23,6 +23,7 @@ class Address {
     private $authId = AUTH_ID;
     private $authToken = AUTH_TOKEN;
 
+
     public $street  = '';
     public $city    = '';
     public $state   = '';
