@@ -20,8 +20,8 @@ class Address {
      * # Displays
      * # Returns ajax response
      */
-    private $authId = "65605c23-5015-5dd7-c238-050594d541c7";
-    private $authToken = "VeT7OjTAAtb9vMEk58gE";
+    private $authId = AUTH_ID;
+    private $authToken = AUTH_TOKEN;
 
     public $street  = '';
     public $city    = '';
